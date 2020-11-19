@@ -4,6 +4,8 @@ import android.content.Context
 import com.example.android.dagger.login.LoginActivity
 import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
+import com.example.android.dagger.registration.enterdetails.EnterDetailsFragment
+import com.example.android.dagger.registration.termsandconditions.TermsAndConditionsFragment
 import com.example.android.dagger.settings.SettingsActivity
 import dagger.BindsInstance
 import dagger.Component
@@ -23,4 +25,6 @@ interface AppComponent {
     fun inject(activity: MainActivity)
     fun inject(activity: SettingsActivity)
     fun inject(activity: LoginActivity)
+    fun inject(fragment: EnterDetailsFragment)
+    fun inject(fragment: TermsAndConditionsFragment)
 }

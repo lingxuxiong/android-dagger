@@ -18,6 +18,7 @@ package com.example.android.dagger.registration
 
 import com.example.android.dagger.user.UserManager
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * RegistrationViewModel is the ViewModel that the Registration flow ([RegistrationActivity]

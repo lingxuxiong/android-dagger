@@ -34,16 +34,14 @@ import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var userManager: UserManager
-    @Inject
-    lateinit var loginViewModel: LoginViewModel
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var loginViewModel: LoginViewModel
 
     private lateinit var errorTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        (application as MyApplication).appComponent.inject(this)
+        (application as MyApplication).appComponent.loginComponent().create().inject(this)
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)

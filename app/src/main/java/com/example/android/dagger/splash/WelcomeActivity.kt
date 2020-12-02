@@ -1,6 +1,5 @@
 package com.example.android.dagger.splash
 
-import androidx.appcompat.app.AppCompatActivity
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -10,17 +9,22 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.os.postDelayed
+import androidx.appcompat.app.AppCompatActivity
 import com.example.android.dagger.MyApplication
 import com.example.android.dagger.R
 import com.example.android.dagger.login.LoginActivity
+import com.example.android.dagger.main.MainActivity
 import com.example.android.dagger.registration.RegistrationActivity
+import javax.inject.Inject
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 class WelcomeActivity : AppCompatActivity() {
+
+    @Inject lateinit var welcomeViewModel: WelcomeViewModel
+
     private lateinit var fullscreenContent: TextView
     private lateinit var fullscreenContentControls: LinearLayout
     private val hideHandler = Handler()
@@ -70,6 +74,9 @@ class WelcomeActivity : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        (application as MyApplication).appComponent.welcomeComponent().create().inject(this)
+
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_welcome)
@@ -140,16 +147,13 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun delayedShow(delayMillis: Int) {
         hideHandler.postDelayed({
-            val userManager = (application as MyApplication).appComponent.userManager()
-            if (!userManager.isUserLoggedIn()) {
-                if (!userManager.isUserRegistered()) {
-                    startActivity(Intent(this, RegistrationActivity::class.java))
-                    finish()
-                } else {
-                    startActivity(Intent(this, LoginActivity::class.java))
-                    finish()
-                }
+            val cls = when (welcomeViewModel.goToScreen()) {
+                RegistrationScreen -> RegistrationActivity::class.java
+                SignInScreen -> LoginActivity::class.java
+                MainScreen -> MainActivity::class.java
             }
+            startActivity(Intent(this, cls))
+            finish()
         }, delayMillis.toLong())
     }
 

@@ -16,7 +16,7 @@
     <string name="refresh_notifications">Refresh Notifications</string>
     <string name="unregister">Unregister</string>
     <string name="placeholder">Placeholder</string>
-    <string name="title_activity_welcome">Welcome</string>
+    <string name="welcome">Welcome Dagger</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

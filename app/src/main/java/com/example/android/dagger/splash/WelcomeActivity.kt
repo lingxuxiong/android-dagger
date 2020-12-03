@@ -148,9 +148,9 @@ class WelcomeActivity : AppCompatActivity() {
     private fun delayedShow(delayMillis: Int) {
         hideHandler.postDelayed({
             val cls = when (welcomeViewModel.goToScreen()) {
-                RegistrationScreen -> RegistrationActivity::class.java
-                SignInScreen -> LoginActivity::class.java
-                MainScreen -> MainActivity::class.java
+                Screen.RegistrationScreen -> RegistrationActivity::class.java
+                Screen.SignInScreen -> LoginActivity::class.java
+                Screen.MainScreen -> MainActivity::class.java
             }
             startActivity(Intent(this, cls))
             finish()

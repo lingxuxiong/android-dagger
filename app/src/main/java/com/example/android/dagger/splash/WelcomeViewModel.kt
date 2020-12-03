@@ -10,19 +10,20 @@ class WelcomeViewModel @Inject constructor(
     fun goToScreen(): Screen {
         return when {
             userManager.isUserLoggedIn() -> {
-                MainScreen
+                Screen.MainScreen
             }
             userManager.isUserRegistered() -> {
-                SignInScreen
+                Screen.SignInScreen
             }
             else -> {
-                RegistrationScreen
+                Screen.RegistrationScreen
             }
         }
     }
 }
 
-sealed class Screen
-object RegistrationScreen : Screen()
-object SignInScreen : Screen()
-object MainScreen : Screen()
+enum class Screen {
+    RegistrationScreen,
+    SignInScreen,
+    MainScreen
+}
